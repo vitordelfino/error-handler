@@ -2,7 +2,7 @@ import { CustomError } from './../models/CustomError'
 import { Response, NextFunction } from 'express';
 import { ValidationError } from 'yup';
 import { Logger } from 'winston';
-export class ErrorHandle {
+export class ErrorHandler {
   public handle(
     err: Error,
     res: Response,
