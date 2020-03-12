@@ -1,7 +1,7 @@
 {
   "name": "error-handler",
   "version": "1.0.0",
-  "description": "Middle to handle erros on express framework",
+  "description": "Middleware to handle erros on express framework",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.js",
   "scripts": {
