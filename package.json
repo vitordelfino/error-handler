@@ -17,6 +17,11 @@
     "error-handler"
   ],
   "author": "Vitor Delfino",
+  "homepage": "https://github.com/vitordelfino/express-handler-errors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vitordelfino/express-handler-errors.git"
+  },
   "license": "ISC",
   "husky": {
     "hooks": {
