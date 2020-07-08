@@ -23,31 +23,14 @@ jobs:
       - name: Execute Tests coverage
         run: yarn coverage
 
-      - name: Archive artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: coverage
-          path: coverage
-
-  update-coverage:
-    name: Update coverage
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@master
-        with:
-          name: coverage
-
-      - name: Upload
+      - name: Upload coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./lcov.info
 
   update-version:
     name: Update package.json version and publish
-    needs: update-coverage
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
