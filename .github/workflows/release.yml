@@ -1,22 +1,11 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
+      - "release/**"
 
 jobs:
-  build:
-    name: Build, test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - run: yarn
-      - run: yarn test
-
   update:
     name: Update Version
     needs: build
@@ -27,19 +16,3 @@ jobs:
         id: bump
         with:
           github_token: ${{ secrets.GP_TOKEN }}
-
-  publish:
-    name: Publish
-    needs: update
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Publish on NPM
-        uses: actions/setup-node@master
-        with:
-          node-version: "12.x"
-          registry-url: "https://registry.npmjs.org"
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
