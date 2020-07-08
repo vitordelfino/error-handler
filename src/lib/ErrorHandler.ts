@@ -3,7 +3,7 @@ import { Response, NextFunction } from 'express';
 import { ValidationError as YupValidationError } from 'yup';
 import { ValidationError } from 'class-validator';
 import { Logger } from 'winston';
-export class ErrorHandler {
+class ErrorHandler {
   public handle(
     err: Error,
     res: Response,
@@ -37,3 +37,5 @@ export class ErrorHandler {
     next(err)
   }
 }
+
+export default new ErrorHandler();

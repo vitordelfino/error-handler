@@ -23,6 +23,6 @@ module.exports = {
     "text"
   ],
   "coveragePathIgnorePatterns": [
-    "/node_modules/"
+    "/node_modules/", "test"
   ],
 }

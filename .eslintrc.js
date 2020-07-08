@@ -6,7 +6,7 @@ module.exports = {
     jest: true,
   },
   extends: [
-    'plugin:@typescript-eslint/recommended', 'airbnb-base', 'prettier'
+    'plugin:@typescript-eslint/recommended', 'airbnb-base', 'prettier', 'prettier/@typescript-eslint'
   ],
   globals: {
     Atomics: 'readonly',
@@ -19,7 +19,8 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
-    'prettier'
+    'prettier',
+    'eslint-plugin-import-helpers'
   ],
   rules: {
     'class-methods-use-this': 0,
@@ -41,6 +42,9 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
+      typescript: {
+        directory: './tsconfig.json',
+      },
       node: {
         paths: ['src'],
         extensions: ['.ts'],
