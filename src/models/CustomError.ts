@@ -13,7 +13,7 @@ export class CustomError extends Error {
 
   public getErrorResponse(): { errors: IErrorResponse[] } {
     return {
-      errors: [this.error],
+      errors: [this.error]
     };
   }
 }

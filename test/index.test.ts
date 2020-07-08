@@ -1,4 +1,5 @@
 import request from "supertest";
+
 import app from "./setup";
 
 describe("Error Handler Tests", () => {
