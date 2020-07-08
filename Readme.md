@@ -1,6 +1,6 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![CI](https://github.com/vitordelfino/express-handler-errors/workflows/CI/badge.svg?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/vitordelfino/express-handler-errors/badge.svg?branch=master)](https://coveralls.io/github/vitordelfino/express-handler-errors?branch=master)
 ![](https://img.shields.io/github/last-commit/vitordelfino/express-handler-errors/master)
 ![](https://img.shields.io/github/issues/vitordelfino/express-handler-errors/master)
 ![](https://img.shields.io/npm/dt/express-handler-errors)
