@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Install Node.js
+        uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Execute Tests coverage
+        run: yarn coverage
+
+      - name: Archive artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: coverage
+          path: coverage
+
+  update-codecov:
+    name: Update coverage
+    needs: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@master
+        with:
+          name: coverage
+
+      - name: Upload
+        uses: codecov/codecov-action@master
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+  update-version:
+    name: Update package.json version and publish
+    needs: update-codecov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: tool3/bump@master
+        with:
+          github_token: ${{ secrets.GP_TOKEN }}
+      - name: Publish on NPM
+        uses: actions/setup-node@master
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
