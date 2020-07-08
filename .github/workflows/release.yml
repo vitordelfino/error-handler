@@ -25,12 +25,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+          github-token: ${{ secrets.github_token }}
         env:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
           GIT_NAME: ${{ secrets.GIT_NAME }}
       - run: git config --global user.email "vitor.delfino952@gmail.com"
       - run: git config --global user.name "vitordelfino"
       - run: npm version patch
+      - run: git push
 
   publish:
     name: Publish
