@@ -1,6 +1,6 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-![PIPELINE](https://github.com/vitordelfino/express-handler-errors/workflows/PIPELINE/badge.svg?branch=master&event=push)
-[![codecov](https://codecov.io/gh/vitordelfino/express-handler-errors/branch/master/graph/badge.svg)](https://codecov.io/gh/vitordelfino/express-handler-errors)
+![CI](https://github.com/vitordelfino/express-handler-errors/workflows/CI/badge.svg?branch=master)
+
 ![](https://img.shields.io/github/last-commit/vitordelfino/express-handler-errors/master)
 ![](https://img.shields.io/github/issues/vitordelfino/express-handler-errors/master)
 ![](https://img.shields.io/npm/dt/express-handler-errors)

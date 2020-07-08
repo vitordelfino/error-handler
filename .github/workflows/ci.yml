@@ -29,7 +29,7 @@ jobs:
           name: coverage
           path: coverage
 
-  update-codecov:
+  update-coverage:
     name: Update coverage
     needs: test
     runs-on: ubuntu-latest
@@ -39,21 +39,16 @@ jobs:
         with:
           name: coverage
 
-      - run: ls
-
       - name: Upload
-        uses: codecov/codecov-action@master
+        uses: coverallsapp/github-action@master
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: lcov.info
-          flags: unittests
-          env_vars: OS,PYTHON
-          name: codecov-umbrella
-          fail_ci_if_error: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./
+          flag-name: Unit
 
   update-version:
     name: Update package.json version and publish
-    needs: update-codecov
+    needs: update-coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
