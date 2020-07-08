@@ -23,20 +23,60 @@ module.exports = {
     'eslint-plugin-import-helpers'
   ],
   rules: {
-    'class-methods-use-this': 0,
-    'no-unused-vars': ['error', { argsIgnorePattern: '[next|^_]' }],
-    'no-console': 0,
-    camelcase: 'off',
-    "import/no-unresolved": "off",
+    'global-require': 'off',
+    'no-new': 'off',
+    'no-prototype-builtins': 'off',
+    'no-restricted-syntax': 'off',
+    'max-classes-per-file': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'no-console': 'off',
     'import/prefer-default-export': 'off',
-    'no-param-reassign': 'off',
-    '@typescript-eslint/camelcase': ['off', { ignoreDestructuring: true }],
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/explicit-function-return-type': ['off'],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '_',
+      },
+    ],
+    'no-useless-constructor': 'off',
+    'import/no-dynamic-require': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'interface',
+        format: ['PascalCase'],
+        custom: {
+          regex: '^I[A-Z]',
+          match: true,
+        },
+      },
+    ],
+    'no-underscore-dangle': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    'prettier/prettier': 'error',
+    'class-methods-use-this': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
       {
         js: 'never',
         ts: 'never',
+      },
+    ],
+    'import-helpers/order-imports': [
+      'warn',
+      {
+        newlinesBetween: 'always', // new line between groups
+        groups: [
+          ['/^express/', 'module'],
+          ['parent', 'sibling', 'index'],
+        ],
+        alphabetize: {
+          order: 'asc',
+          ignoreCase: true,
+        },
       },
     ],
   },

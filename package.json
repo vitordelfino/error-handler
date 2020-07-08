@@ -9,6 +9,7 @@
     "test": "jest --detectOpenHandles --forceExit --verbose",
     "coverage": "NODE_ENV=test rimraf coverage && jest --coverage --silent --detectOpenHandles --forceExit",
     "tsc": "tsc",
+    "lint": "eslint src --ext ts",
     "build": "rimraf dist && npm run tsc",
     "postinstall": "npm run build"
   },
@@ -37,7 +38,6 @@
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "dependencies": {
-    "@types/yup": "^0.28.0",
     "class-validator": "^0.12.2",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -53,6 +53,7 @@
     "@types/node": "^13.9.0",
     "@types/supertest": "^2.0.10",
     "@types/winston": "^2.4.4",
+    "@types/yup": "^0.29.3",
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "babel-eslint": "^10.0.3",
@@ -62,7 +63,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-import-helpers": "^1.0.2",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
