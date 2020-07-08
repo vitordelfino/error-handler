@@ -28,17 +28,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-          github-token: ${{ secrets.github_token }}
+
+      - name: "Setup GIT"
+        run: |
+          git switch -c master
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+
+      - name: Update & push
         env:
-          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-          GIT_NAME: ${{ secrets.GIT_NAME }}
-      - run: git config --global user.email "vitor.delfino952@gmail.com"
-      - run: git config --global user.name "vitordelfino"
-      - run: npm version patch
-      - run: git push origin master
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          npm version patch
+          git add .
+          git commit -m "chore: release" --no-verify
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
   publish:
     name: Publish
@@ -50,7 +54,7 @@ jobs:
       - name: Publish on NPM
         uses: actions/setup-node@master
         with:
-          node-version: "10.x"
+          node-version: "12.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm publish --access public
         env:
