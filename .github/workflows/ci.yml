@@ -43,8 +43,7 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./
-          flag-name: Unit
+          path-to-lcov: .
 
   update-version:
     name: Update package.json version and publish
