@@ -1,39 +1,48 @@
-import { CustomError } from './../models/CustomError'
-import { Response, NextFunction } from 'express';
-import { ValidationError as YupValidationError } from 'yup';
-import { ValidationError } from 'class-validator';
-import { Logger } from 'winston';
-export class ErrorHandler {
+import { ValidationError } from "class-validator";
+import { Response, NextFunction } from "express";
+import { Logger } from "winston";
+import { ValidationError as YupValidationError } from "yup";
+
+import { CustomError } from "../models/CustomError";
+
+class ErrorHandler {
   public handle(
     err: Error,
     res: Response,
     next: NextFunction,
-    logger?: Logger,
+    logger?: Logger
   ): void {
-    if(logger)
+    if (logger)
       logger.error(`ErrorHandle::handle::${err.name}::${err.message}`);
-    if(err instanceof CustomError) {
+    if (err instanceof CustomError) {
       res.status(err.error.status).json(err.getErrorResponse());
     } else if (err instanceof YupValidationError) {
-      const errors = err.errors.map((error: string) => ({ code: err.name, message: error }));
+      const errors = err.errors.map((error: string) => ({
+        code: err.name,
+        message: error
+      }));
       res.status(400).json({ errors });
     } else if (Array.isArray(err) && err[0] instanceof ValidationError) {
       const errors = err.map((e: ValidationError) => {
-        const messages = Object.keys(e.constraints!).map(key => e.constraints![key])
+        const messages = Object.keys(e.constraints!).map(
+          key => e.constraints![key]
+        );
 
-        return { code: 'ValidationError', messages}
-      })
-      res.status(400).json({ errors })
+        return { code: "ValidationError", messages };
+      });
+      res.status(400).json({ errors });
     } else {
       res.status(500).json({
         errors: [
           {
-            code: 'E0001',
-            message: err.message,
-          },
-        ],
+            code: "E0001",
+            message: err.message
+          }
+        ]
       });
     }
-    next(err)
+    next(err);
   }
 }
+
+export default new ErrorHandler();
