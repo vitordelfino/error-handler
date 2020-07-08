@@ -38,9 +38,9 @@ jobs:
       - name: Update & push
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
+      - run: |
           npm version patch
-          git add .
+          git add package.json
           git commit -m "chore: release" --no-verify
           git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
