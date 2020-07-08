@@ -27,15 +27,10 @@
   "license": "ISC",
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "pre-commit": "npm test"
     }
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "dependencies": {
     "class-validator": "^0.12.2",
