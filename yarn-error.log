@@ -1,5 +1,5 @@
 Arguments: 
-  /home/vitordelfino/.nvm/versions/node/v12.14.1/bin/node /usr/share/yarn/bin/yarn.js add -D @types/class-transformer
+  /home/vitordelfino/.nvm/versions/node/v12.14.1/bin/node /usr/share/yarn/bin/yarn.js add -D @types/class-validator
 
 PATH: 
   /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/vitordelfino/.zinit/polaris/bin:/home/vitordelfino/.nvm/versions/node/v12.14.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/vitordelfino/.npm-global/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fclass-transformer: Not found
+  Error: https://registry.yarnpkg.com/@types%2fclass-validator: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66987:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:140748:22)
       at Request.emit (events.js:223:5)
@@ -29,14 +29,16 @@ Trace:
 npm manifest: 
   {
     "name": "express-handler-errors",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "node": "v12.14.1",
     "description": "Middleware to handle erros on express framework",
     "main": "dist/src/index.js",
     "typings": "dist/src/index.d.ts",
     "scripts": {
       "test": "jest --detectOpenHandles --forceExit --verbose",
+      "coverage": "NODE_ENV=test rimraf coverage && jest --coverage --silent --detectOpenHandles --forceExit",
       "tsc": "tsc",
+      "lint": "eslint src --ext ts",
       "build": "rimraf dist && npm run tsc",
       "postinstall": "npm run build"
     },
@@ -68,6 +70,7 @@ npm manifest:
       "@types/yup": "^0.28.0",
       "class-validator": "^0.12.2",
       "express": "^4.17.1",
+      "express-async-errors": "^3.1.1",
       "rimraf": "^3.0.2",
       "winston": "^3.2.1",
       "yup": "^0.28.5"
@@ -90,6 +93,7 @@ npm manifest:
       "eslint-config-airbnb-base": "^14.0.0",
       "eslint-config-prettier": "^6.11.0",
       "eslint-plugin-import": "^2.20.1",
+      "eslint-plugin-import-helpers": "^1.0.2",
       "eslint-plugin-prettier": "^3.1.2",
       "husky": "^4.2.3",
       "jest": "^25.1.0",
@@ -2030,6 +2034,11 @@ Lockfile:
       debug "^2.6.9"
       pkg-dir "^2.0.0"
   
+  eslint-plugin-import-helpers@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-import-helpers/-/eslint-plugin-import-helpers-1.0.2.tgz#ae0ab47c991c65e1b25b6370f49afa2cab4cbd9c"
+    integrity sha512-aSoqeEEkJou/1NhbSO7Xr2SKSs8mI53qe8uFh9tMl4WCbrOwoel0eA3hRajlJ7MLCG44umf+mY3/dWuufneFzw==
+  
   eslint-plugin-import@^2.20.1:
     version "2.20.1"
     resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.20.1.tgz#802423196dcb11d9ce8435a5fc02a6d3b46939b3"
@@ -2231,6 +2240,11 @@ Lockfile:
       jest-matcher-utils "^25.1.0"
       jest-message-util "^25.1.0"
       jest-regex-util "^25.1.0"
+  
+  express-async-errors@^3.1.1:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/express-async-errors/-/express-async-errors-3.1.1.tgz#6053236d61d21ddef4892d6bd1d736889fc9da41"
+    integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
   
   express@^4.17.1:
     version "4.17.1"

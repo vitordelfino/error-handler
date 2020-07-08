@@ -2,8 +2,6 @@ name: Test
 
 on:
   pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -16,7 +14,12 @@ jobs:
         uses: action/setup-node@v1
         with:
           node-version: 12.x
-      - run: yarn
-      - run: yarn test
-        env:
-          CI: true
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Tests
+        run: yarn coverage
+
+      - name: Check linting
+        run: yarn lint
