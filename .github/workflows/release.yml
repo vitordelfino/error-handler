@@ -22,21 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-
-      - name: "Setup GIT"
-        run: |
-          git switch -c master
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git config user.name "$GITHUB_ACTOR"
-
-      - name: Update & push
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        run: |
-          npm version patch
-          git status
-          git commit -m "chore: release" --no-verify
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+      - uses: tool3/bump@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          unrelated: true
 
   publish:
     name: Publish
