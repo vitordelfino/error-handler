@@ -25,9 +25,8 @@ jobs:
       - uses: tool3/bump@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          unrelated: true
-          email: $GITHUB_ACTOR@users.noreply.github.com
-          name: $GITHUB_ACTOR
+          email: "$GITHUB_ACTOR@users.noreply.github.com"
+          user: "$GITHUB_ACTOR"
 
   publish:
     name: Publish
