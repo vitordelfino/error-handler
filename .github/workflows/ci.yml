@@ -30,7 +30,7 @@ jobs:
 
   update-codecov:
     name: Update coverage
-    needs: Tests
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
