@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -13,6 +14,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - run: yarn
       - run: yarn test
 
@@ -22,9 +29,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: tool3/bump@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Setup GIT"
+        run: |
+          git switch -c master
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+
+      - name: Update & push
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      -  run: npm version patch
+      -  run:  git add package.json
+      -  run: git commit -m "chore: release" --no-verify
+      -  run: git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
 
   publish:
     name: Publish
