@@ -3,7 +3,7 @@ import { validateOrReject } from "class-validator";
 import express, { Response, NextFunction } from "express";
 import * as yup from "yup";
 
-import ErrorHandler from "../src/lib/ErrorHandler";
+import { ErrorHandler } from "../src/lib/ErrorHandler";
 import { CustomError } from "../src/models/CustomError";
 import { Teste } from "./ClassTest";
 import "express-async-errors";
@@ -53,6 +53,6 @@ app.get("/error", () => {
 });
 
 app.use((err: Error, _: any, res: Response, next: NextFunction) => {
-  ErrorHandler.handle(err, res, next);
+  new ErrorHandler().handle(err, res, next);
 });
 export default app;

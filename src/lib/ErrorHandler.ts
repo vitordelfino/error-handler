@@ -5,7 +5,7 @@ import { ValidationError as YupValidationError } from "yup";
 
 import { CustomError } from "../models/CustomError";
 
-class ErrorHandler {
+export class ErrorHandler {
   public handle(
     err: Error,
     res: Response,
@@ -44,5 +44,3 @@ class ErrorHandler {
     next(err);
   }
 }
-
-export default new ErrorHandler();
