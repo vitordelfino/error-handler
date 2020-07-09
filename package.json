@@ -5,6 +5,9 @@
   "description": "Middleware to handle erros on express framework",
   "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest --detectOpenHandles --forceExit --verbose",
     "coverage": "NODE_ENV=test rimraf coverage && jest --coverage --silent --detectOpenHandles --forceExit",
