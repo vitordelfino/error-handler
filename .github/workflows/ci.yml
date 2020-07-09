@@ -1,48 +1,48 @@
-name: CI
+# name: CI
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  test:
-    name: Run tests
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@master
+# jobs:
+#   test:
+#     name: Run tests
+#     runs-on: "ubuntu-latest"
+#     steps:
+#       - uses: actions/checkout@master
 
-      - name: Install Node.js
-        uses: actions/setup-node@master
-        with:
-          node-version: 12.x
+#       - name: Install Node.js
+#         uses: actions/setup-node@master
+#         with:
+#           node-version: 12.x
 
-      - name: Install dependencies
-        run: yarn
+#       - name: Install dependencies
+#         run: yarn
 
-      - name: Execute Tests coverage
-        run: yarn coverage
+#       - name: Execute Tests coverage
+#         run: yarn coverage
 
-      - name: Upload coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Upload coveralls
+#         uses: coverallsapp/github-action@master
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-  update-version:
-    name: Update package.json version and publish
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: tool3/bump@master
-        with:
-          github_token: ${{ secrets.GP_TOKEN }}
-      - name: Publish on NPM
-        uses: actions/setup-node@master
-        with:
-          node-version: "12.x"
-          registry-url: "https://registry.npmjs.org"
+#   update-version:
+#     name: Update package.json version and publish
+#     needs: test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@master
+#       - uses: tool3/bump@master
+#         with:
+#           github_token: ${{ secrets.GP_TOKEN }}
+#       - name: Publish on NPM
+#         uses: actions/setup-node@master
+#         with:
+#           node-version: "12.x"
+#           registry-url: "https://registry.npmjs.org"
 
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+#       - run: npm publish --access public
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
