@@ -30,12 +30,19 @@ describe("Error Handler Tests", () => {
   test("should returm CustomError", async () => {
     await request(app)
       .get("/custom-error")
-      .send({ param1: "param" })
       .expect(400, {
         errors: [{ code: "CustomError", message: "custom error", status: 400 }]
       });
   });
-
+  test("should returm CustomPrismaError", async () => {
+    await request(app)
+      .get("/custom-prisma-error")
+      .expect(422, {
+        code: "PrismaValidationError",
+        errors: ["Some error", "Other error"],
+        status: 422
+      });
+  });
   test("should returm Error", async () => {
     await request(app)
       .get("/error")

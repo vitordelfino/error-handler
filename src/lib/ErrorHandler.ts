@@ -4,6 +4,7 @@ import { Logger } from "winston";
 import { ValidationError as YupValidationError } from "yup";
 
 import { CustomError } from "../models/CustomError";
+import { CustomPrismaError } from "../models/CustomPrismaError";
 
 export class ErrorHandler {
   public handle(
@@ -14,6 +15,9 @@ export class ErrorHandler {
   ): void {
     if (logger)
       logger.error(`ErrorHandle::handle::${err.name}::${err.message}`);
+    if (err instanceof CustomPrismaError) {
+      res.status(err.status).json(err.getErrorResponse());
+    }
     if (err instanceof CustomError) {
       res.status(err.error.status).json(err.getErrorResponse());
     } else if (err instanceof YupValidationError) {

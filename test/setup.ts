@@ -5,7 +5,9 @@ import * as yup from "yup";
 
 import { ErrorHandler } from "../src/lib/ErrorHandler";
 import { CustomError } from "../src/models/CustomError";
+import { CustomPrismaError } from "../src/models/CustomPrismaError";
 import { Teste } from "./ClassTest";
+import logger from "./mock-logger";
 import "express-async-errors";
 
 const app = express();
@@ -48,11 +50,15 @@ app.get("/custom-error", () => {
   });
 });
 
+app.get("/custom-prisma-error", () => {
+  throw new CustomPrismaError(["Some error", "Other error"]);
+});
+
 app.get("/error", () => {
   throw new Error("some error");
 });
 
 app.use((err: Error, _: any, res: Response, next: NextFunction) => {
-  new ErrorHandler().handle(err, res, next);
+  new ErrorHandler().handle(err, res, next, logger as any);
 });
 export default app;

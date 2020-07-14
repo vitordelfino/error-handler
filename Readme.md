@@ -24,6 +24,38 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 });
 ```
 
+- Using with [Prisma v2](https://www.prisma.io/docs/)
+
+```typescript
+import {
+  PrismaClient,
+  PrismaClientValidationError,
+  SomeModel
+} from "@prista/client";
+import { CustomPrismaError } from "express-error-handler";
+class Service {
+  private readonly prista;
+
+  constructor() {
+    // errorFormat must be minimal
+    this.prista = new PrismaClient({
+      errorFormat: "minimal"
+    });
+  }
+  async create(data: SomeModel): Promise<SomeModel> {
+    try {
+    } catch (e) {
+      if (e instanceof PrismaClientValidationError) {
+        const errors = e.message.split("\n");
+        // status param is optional, default value is 422
+        throw new CustomPrismaError(errors, 400);
+      }
+      throw e;
+    }
+  }
+}
+```
+
 You can pass a winston instance to log errors
 
 ```typescript
