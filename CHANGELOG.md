@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/vitordelfino/express-handler-errors/compare/v2.1.1...v2.2.0) (2020-07-14)
+
+
+### Features
+
+* **error-handler:** add prisma2 support ([c6692c5](https://github.com/vitordelfino/express-handler-errors/commit/c6692c51c2a9ba8d030be9220f2dd649bb3255c9))
+
 ## [2.1.1](https://github.com/vitordelfino/express-handler-errors/compare/v2.1.0...v2.1.1) (2020-07-09)
 
 
