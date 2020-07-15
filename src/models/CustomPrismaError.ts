@@ -1,9 +1,10 @@
-export class CustomPrismaError {
+export class CustomPrismaError extends Error {
   private readonly errors: string[];
 
   public readonly status: number;
 
   constructor(errors: string[], status = 422) {
+    super("Prisma validation Error");
     this.errors = errors;
     this.status = status;
   }

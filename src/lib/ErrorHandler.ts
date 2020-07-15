@@ -17,8 +17,7 @@ export class ErrorHandler {
       logger.error(`ErrorHandle::handle::${err.name}::${err.message}`);
     if (err instanceof CustomPrismaError) {
       res.status(err.status).json(err.getErrorResponse());
-    }
-    if (err instanceof CustomError) {
+    } else if (err instanceof CustomError) {
       res.status(err.error.status).json(err.getErrorResponse());
     } else if (err instanceof YupValidationError) {
       const errors = err.errors.map((error: string) => ({
