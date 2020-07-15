@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/vitordelfino/express-handler-errors/compare/v2.2.0...v2.2.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* **custom-prisma-error:** extends error on class ([5df19b1](https://github.com/vitordelfino/express-handler-errors/commit/5df19b1d821bbd4a201890e710395844eb90344d))
+
 # [2.2.0](https://github.com/vitordelfino/express-handler-errors/compare/v2.1.1...v2.2.0) (2020-07-14)
 
 
