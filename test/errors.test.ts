@@ -1,8 +1,36 @@
 import request from "supertest";
 
-import app from "./setup";
+import { app, app2 } from "./setup";
+// import app2 from "./setup2";
 
 describe("Error Handler Tests", () => {
+  test("should return error pass by callback functions", async () => {
+    await request(app2)
+      .get("/custom-other-error")
+      .expect(400, {
+        otherErrors: [
+          {
+            code: "OTHER_ERROR",
+            status: 400,
+            message: "Throw another error"
+          }
+        ]
+      });
+  });
+
+  test("should return else error pass by callback functions", async () => {
+    await request(app2)
+      .get("/else-custom-other-error")
+      .expect(500, {
+        elseOtherErrors: [
+          {
+            code: "ELSE_OTHER_ERROR",
+            status: 500,
+            message: "Throw another error"
+          }
+        ]
+      });
+  });
   test("should return error when validate with yup", async () => {
     await request(app)
       .post("/yup")

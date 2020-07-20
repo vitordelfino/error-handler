@@ -11,10 +11,15 @@ export class ErrorHandler {
     err: Error,
     res: Response,
     next: NextFunction,
-    logger?: Logger
+    logger?: Logger,
+    ...callbacks: Function[]
   ): void {
     if (logger)
       logger.error(`ErrorHandle::handle::${err.name}::${err.message}`);
+    if (callbacks && callbacks.length > 0) {
+      console.log("callbacks", callbacks);
+      callbacks.forEach(callback => callback(err, res, next));
+    }
     if (err instanceof CustomPrismaError) {
       res.status(err.status).json(err.getErrorResponse());
     } else if (err instanceof CustomError) {

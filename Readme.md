@@ -14,73 +14,26 @@ Middleware to send custom errors in yours requests
 
 ## How to use
 
-```typescript
-import express, { Request, Response, NextFunction } from "express";
-import { ErrorHandler } from "express-handler-errors";
-
-const app = express();
-
-app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
-  new ErrorHandler.handle(err, res, next);
-});
-```
+![configure](./docs/configure.png)
 
 - Using with [Prisma v2](https://www.prisma.io/docs/)
 
-```typescript
-import {
-  PrismaClient,
-  PrismaClientValidationError,
-  SomeModel
-} from "@prista/client";
-import { CustomPrismaError } from "express-error-handler";
-class Service {
-  private readonly prista;
-
-  constructor() {
-    // errorFormat must be minimal
-    this.prista = new PrismaClient({
-      errorFormat: "minimal"
-    });
-  }
-  async create(data: SomeModel): Promise<SomeModel> {
-    try {
-    } catch (e) {
-      if (e instanceof PrismaClientValidationError) {
-        const errors = e.message.split("\n");
-        // status param is optional, default value is 422
-        throw new CustomPrismaError(errors, 400);
-      }
-      throw e;
-    }
-  }
-}
-```
+![prisma](./docs/prisma.png)
 
 You can pass a winston instance to log errors
 
-```typescript
-app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
-  new ErrorHandler.handle(err, res, next, logger);
-});
-```
+![logger](./docs/logger.png)
 
 In your service
 
-```typescript
-import { CustomError } from "express-handler-errors";
+![service](./docs/service.png)
 
-class SomeService {
-  async someMethod() {
-    try {
-      return doSomething();
-    } catch (e) {
-      throw new CustomError({
-        code: "E0001",
-        message: "some message",
-        status: 400 // http status code
-      });
-    }
-  }
-}
-```
+## implement your own error functions and pass by parameter
+
+- Error classes
+
+![config class](./docs/config-class.png)
+
+- Configure Hadler on express
+
+![config functions](./docs/config-functions.png)
