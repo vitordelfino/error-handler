@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/vitordelfino/express-handler-errors/compare/v2.3.0...v2.3.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* remove console.log ([ed7bbc3](https://github.com/vitordelfino/express-handler-errors/commit/ed7bbc3b414d2a4a858a85cb99fccf13b3d49235))
+
 # [2.3.0](https://github.com/vitordelfino/express-handler-errors/compare/v2.2.1...v2.3.0) (2020-07-20)
 
 

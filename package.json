@@ -1,6 +1,6 @@
 {
   "name": "express-handler-errors",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "node": "v12.14.1",
   "description": "Middleware to handle erros on express framework",
   "main": "dist/src/index.js",
