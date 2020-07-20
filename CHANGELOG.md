@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/vitordelfino/express-handler-errors/compare/v2.2.1...v2.3.0) (2020-07-20)
+
+
+### Features
+
+* **handler:** accept functions ([3e8154f](https://github.com/vitordelfino/express-handler-errors/commit/3e8154f6eb966c007080ce5baeb9c46152420b26))
+
 ## [2.2.1](https://github.com/vitordelfino/express-handler-errors/compare/v2.2.0...v2.2.1) (2020-07-15)
 
 
