@@ -17,7 +17,6 @@ export class ErrorHandler {
     if (logger)
       logger.error(`ErrorHandle::handle::${err.name}::${err.message}`);
     if (callbacks && callbacks.length > 0) {
-      console.log("callbacks", callbacks);
       callbacks.forEach(callback => callback(err, res, next));
     }
     if (err instanceof CustomPrismaError) {
